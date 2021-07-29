@@ -14,7 +14,7 @@ Suite Setup       Setup
 Suite Teardown    Teardown
 
 *** Variables ***
-${SPACEX_API_BASE_URL}=    https://api.spacexdata.com/v3
+${SPACEX_API_BASE_URL}=    https://api.spacexdata.com/v4
 ${SPACEX_API_LATEST_LAUNCHES}=    /launches/latest
 
 *** Keywords ***
@@ -44,10 +44,10 @@ Log info
     ${launch}=    Set Variable    ${response.json()}
     Notebook Print    ${pretty_json}
     Log    ${pretty_json}
-    Notebook Print    ${launch["mission_name"]}
-    Log    ${launch["mission_name"]}
-    Notebook Print    ${launch["rocket"]["rocket_name"]}
-    Log    ${launch["rocket"]["rocket_name"]}
+    Notebook Print    ${launch["name"]}
+    Log    ${launch["name"]}
+    Notebook Print    ${launch["links"]["reddit"]["campaign"]}
+    Log    ${launch["links"]["reddit"]["campaign"]}
 
 *** Tasks ***
 Log latest launch info
