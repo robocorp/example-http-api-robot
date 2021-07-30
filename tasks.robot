@@ -5,25 +5,13 @@
 
 *** Settings ***
 Documentation     HTTP API robot. Retrieves data from SpaceX API. Demonstrates
-...               how to use RPA.HTTP (create session, get response, validate
-...               response status, get response as JSON, access JSON
-...               properties, etc.).
+...               how to use RPA.HTTP (get response, validate response status,
+...               get response as JSON, access JSON properties, etc.).
 Library           RPA.HTTP
 Library           RPA.core.notebook
-Suite Setup       Setup
-Suite Teardown    Teardown
 
 *** Variables ***
-${SPACEX_API_BASE_URL}=    https://api.spacexdata.com/v4
-${SPACEX_API_LATEST_LAUNCHES}=    /launches/latest
-
-*** Keywords ***
-Setup
-    Create Session    spacex    ${SPACEX_API_BASE_URL}    verify=True
-
-*** Keywords ***
-Teardown
-    Delete All Sessions
+${SPACEX_API_LATEST_LAUNCHES_URL}=    https://api.spacexdata.com/v4/launches/latest
 
 *** Keywords ***
 Log latest launch
@@ -32,7 +20,7 @@ Log latest launch
 
 *** Keywords ***
 Get latest launch
-    ${response}=    GET On Session    spacex    ${SPACEX_API_LATEST_LAUNCHES}
+    ${response}=    GET    ${SPACEX_API_LATEST_LAUNCHES_URL}
     Request Should Be Successful
     Status Should Be    200
     [Return]    ${response}
