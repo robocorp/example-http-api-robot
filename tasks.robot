@@ -33,8 +33,8 @@ Log latest launch
 *** Keywords ***
 Get latest launch
     ${response}=    GET On Session    spacex    ${SPACEX_API_LATEST_LAUNCHES}
-    Request Should Be Successful    ${response}
-    Status Should Be    200    ${response}
+    Request Should Be Successful
+    Status Should Be    200
     [Return]    ${response}
 
 *** Keywords ***
