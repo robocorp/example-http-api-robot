@@ -6,8 +6,8 @@
 *** Settings ***
 Documentation     HTTP API robot. Retrieves data from SpaceX API. Demonstrates
 ...               how to use RPA.HTTP (create session, get response, validate
-...               response status, pretty-print, get response as text, get
-...               response as JSON, access JSON properties, etc.).
+...               response status, get response as JSON, access JSON
+...               properties, etc.).
 Library           RPA.HTTP
 Library           RPA.core.notebook
 Suite Setup       Setup
@@ -32,7 +32,7 @@ Log latest launch
 
 *** Keywords ***
 Get latest launch
-    ${response}=    Get Request    spacex    ${SPACEX_API_LATEST_LAUNCHES}
+    ${response}=    GET On Session    spacex    ${SPACEX_API_LATEST_LAUNCHES}
     Request Should Be Successful    ${response}
     Status Should Be    200    ${response}
     [Return]    ${response}
@@ -40,10 +40,9 @@ Get latest launch
 *** Keywords ***
 Log info
     [Arguments]    ${response}
-    ${pretty_json}=    To Json    ${response.text}    pretty_print=True
     ${launch}=    Set Variable    ${response.json()}
-    Notebook Print    ${pretty_json}
-    Log    ${pretty_json}
+    Notebook Print    ${launch}
+    Log    ${launch}
     Notebook Print    ${launch["name"]}
     Log    ${launch["name"]}
     Notebook Print    ${launch["links"]["reddit"]["campaign"]}
