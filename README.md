@@ -1,4 +1,4 @@
-# Http API robot
+# HTTP API robot
 
 This simple robot fetches and logs the latest launch data from SpaceX API using RPA Framework.
 
